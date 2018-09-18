@@ -1,0 +1,59 @@
+
+            <div class="col-md-3">
+
+				<div class="tab sitebar sps sps--abv sps--blw">
+					<ul class="nav nav-tabs">
+						<li class="active"><a  href="#1" data-toggle="tab">Latest</a></li>
+						<li><a href="#2" data-toggle="tab">Populer</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div class="tab-pane active" id="1">
+							<% for(var i = 0; i < 5; i++) { %>
+								<div class="media">
+									<div class="media-left">
+										<a href="#"><img class="media-object" src="<%= latest[i].image %>" alt="Generic placeholder image" style="width:100px"></a>
+									</div><!--media-left-->
+									<div class="media-body">
+										<h4 class="media-heading"><a href="/<%= latest[i].category %>/<%= latest[i]._id %>/<%= latest[i].name %>"><%= latest[i].name.slice(0,40) %></a></h4>
+										
+									</div><!--media-body-->
+								</div><!--media-->
+							<% } %>
+						</div><!--tab-pane-->
+
+						<div class="tab-pane" id="2">
+							<% for(var i = 0; i < 5; i++) { %>
+								<div class="media">
+									<div class="media-left">
+										<a href="#"><img class="media-object" src="<%= popular[i].image %>" alt="Generic placeholder image" style="width:100px"></a>
+									</div><!--media-left-->
+									<div class="media-body">
+										<h3 class="media-heading"><a href="/<%= popular[i].category %>/<%= popular[i]._id %>/<%= popular[i].name %>"><%= popular[i].name.slice(0,40) %></a></h3>
+										
+									</div><!--media-body-->
+								</div><!--media-->
+							<% } %>
+						</div><!--tab-pane-->
+					</div><!--tab-content-->
+				</div><!--tab-->
+				<div class="most_comment">
+                    <div class="sidebar_title">
+                        <h2>Last Commented</h2>
+                    </div>
+                    <% for(var i = 0; i < 5; i++) { %>
+	                     <div class="media">
+	                        <div class="media-left">
+	                            <a href=""><img class="media-object" src="<%= mostCommented[i].image %>" alt="Generic placeholder image" style="width:100px"></a>
+	                        </div><!--media-left-->
+	                        <div class="media-body">
+	                            <h3 class="media-heading"><a href="/<%= mostCommented[i].category %>/<%= mostCommented[i]._id %>/<%= mostCommented[i].name %>">Spain going to made class football</a></h3>
+	                             <div class="comment_box">
+	                                <div class="comments_icon"> <i class="fa fa-comments" aria-hidden="true"></i></div>
+	                                 <div class="comments"><%= mostCommented[i].comments.length %> Comments</div>
+	                             </div><!--comment_box-->
+	                        </div><!--media-body-->
+	                    </div><!--media-->
+                    <% } %>
+                </div><!--most_comment-->
+			</div>

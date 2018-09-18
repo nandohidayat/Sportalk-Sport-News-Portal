@@ -1,0 +1,140 @@
+<% include ../partials/header %>
+    <section id="feature_category_section" class="feature_category_section single-page section_wrapper">
+	<div class="container">   
+		<div class="row">
+		   	 <div class="col-md-9">
+				<div class="single_content_layout">
+					<div class="item feature_news_item">
+						<div class="item_img">
+							<img  class="img-responsive" src="<%= news.image %>" alt="Chania">
+						</div><!--item_img--> 
+							<div class="item_wrapper">
+								<div class="news_item_title">
+									<h2><a href="#"><%= news.name %></a></h2>
+								</div><!--news_item_title-->
+								<div class="item_meta"><%= news.created.toLocaleDateString() %>, by: <%= news.author.username %></div>
+
+         <!--                           <span class="rating">-->
+									<!--	<i class="fa fa-star"></i>-->
+									<!--	<i class="fa fa-star"></i>-->
+									<!--	<i class="fa fa-star"></i>-->
+									<!--	<i class="fa fa-star"></i>-->
+									<!--	<i class="fa fa-star-half-full"></i>-->
+									<!--</span>-->
+
+									<!--<div class="single_social_icon">-->
+									<!--	<a class="icons-sm fb-ic" href="#"><i class="fa fa-facebook"></i><span>Facebook</span></a>-->
+										<!--Twitter-->
+									<!--	<a class="icons-sm tw-ic" href="#"><i class="fa fa-twitter"></i><span>Twitter</span></a>-->
+										<!--Google +-->
+									<!--	<a class="icons-sm gplus-ic" href="#"><i class="fa fa-google-plus"></i><span>Google Plus</span></a>-->
+										<!--Linkedin-->
+									<!--	<a class="icons-sm li-ic" href="#"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>-->
+
+									<!--</div> <!--social_icon1-->
+
+									<div class="item_content">
+									    <p><%- news.description %></p>
+									</div><!--item_content-->
+                                    <div class="category_list">
+                                        <a href="/<%= news.category %>"><%= news.category %></a>
+                                    </div><!--category_list-->
+                                    <% if(currentUser && currentUser.role === "admin") { %>
+	                                    <div class="comment_article_social">
+										<!--<a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>-->
+										<!--<a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>-->
+											<a class="btn btn-warning btn-xs" href="/<%= news.category %>/<%= news._id %>/<%= news.name %>/edit"><span class="" style=""> Edit </span></a>
+											<form action="/<%= news.category %>/<%= news._id %>/<%= news.name %>?_method=DELETE" method="POST" style="display:inline">
+												<button class="btn btn-warning btn-xs"> Delete </button>
+											</form>
+											<!--<a href="#"><span class="reply_ic"> Delete </span></a>-->
+										</div>
+									<% } %>
+							</div><!--item_wrapper-->	
+					</div><!--feature_news_item-->
+					
+					<div class="single_related_news">
+					 <div class="single_media_title"><h2>Related News</h2></div>
+						<div class="media_wrapper">
+							<% for(var i = 0; i < 3; i++) { %>
+								<div class="media">
+									<div class="media-left">
+										<a href="#"><img class="media-object" src="<%= related[i].image %>" alt="Generic placeholder image" style="width:100px"></a>
+									</div><!--media-left-->
+									<div class="media-body">
+										<h4 class="media-heading"><a href="/<%= related[i].category %>/<%= related[i]._id %>/<%= related[i].name %>"><%= related[i].name %>
+										</a></h4>
+										<div class="media_meta"><%= related[i].created.toLocaleDateString() %>, by: <%= related[i].author.username %></div>
+										<div class="media_content"><p><%- related[i].description.slice(0,100) %></p>
+	                                    </div><!--media_content-->
+									</div><!--media-body-->
+								</div><!--media-->
+							<% } %>
+						</div><!--media_wrapper-->
+					</div><!--single_related_news-->
+					</strong>
+					</strong>
+					</strong>
+					</strong>
+
+					<!--<div class="ad">-->
+					<!--	<img class="img-responsive" src="/img/img-single-ad.jpg" alt="Chania">-->
+					<!--</div>-->
+
+					<div class="readers_comment">
+                        <div class="single_media_title"><h2>Related Comments</h2></div>
+						<% news.comments.forEach(function(comment) { %>
+							<div class="media">
+								<div class="media-left">
+									<a href="#">
+										<img alt="64x64" class="media-object" data-src="/<%= comment.author.image %>"
+											 src="/<%= comment.author.image %>" data-holder-rendered="true" style="width:50px">
+									</a>
+								</div>
+								<div class="media-body">
+									<h2 class="media-heading"><%= comment.author.username %></h2>
+									<%= comment.text %>
+									
+									<% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
+									<div class="comment_article_social">
+										<!--<a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>-->
+										<!--<a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>-->
+										<!--<a href="#"><span class="reply_ic"> Delete </span></a>-->
+										<form action="/<%= news.category %>/<%= news._id %>/<%= news.name %>/<%= comment._id %>?_method=DELETE" method="POST" style="display:inline">
+											<button class="btn btn-xs btn-warning"> Delete </button>
+										</form>
+									</div>
+									<% } %>
+								</div>
+	
+								</div>
+						<% }); %>
+					</div><!--readers_comment-->
+					
+					<div class="add_a_comment">
+						<div class="single_media_title"><h2>Add a Comment</h2></div>
+						<div class="comment_form">
+							<form action="/<%= news.category %>/<%= news._id %>/<%= news.name %>/comment" method="POST">
+								<% if(currentUser) { %>
+	                            <div class="form-group">
+	                                <input type="text" class="form-control" id="inputName" value="<%= currentUser.username %>" disabled>
+	                            </div>
+	                            <% } %>
+	                            <div class="form-group comment">
+	                                <textarea class="form-control" id="inputComment" name="comment[text]" placeholder="Comment"></textarea>
+	                            </div>
+
+	                            <button type="submit" class="btn btn-submit red">Submit</button>
+	                        </form>
+                        </div><!--comment_form-->
+					</div><!--add_a_comment-->
+				   			 
+				</div><!--single_content_layout-->
+		   	 </div>
+				
+    		   	<% include ../partials/sidebar %>
+    		 </div>
+		</div>	   	
+</section><!--feature_category_section-->
+
+<% include ../partials/footer %>

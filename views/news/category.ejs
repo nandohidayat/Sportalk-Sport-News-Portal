@@ -1,0 +1,69 @@
+<% include ../partials/header %>
+
+<!-- Feature Category Section & sidebar -->
+	<section id="feature_category_section" class="feature_category_section category_page section_wrapper">
+	<div class="container">   
+		<div class="row">
+		   	<div class="col-md-9">
+		   		<div class="row">								 
+					<div class="col-md-12">
+						<div class="feature_news_item category_item">
+                			<div class="item">
+								<div class="item_wrapper">
+									<div class="item_img">
+										<img class="img-responsive" src="<%= category[0].image %>" alt="Chania" style="width:100%">
+									</div><!--item_img--> 
+									<div class="item_title_date">
+										<div class="news_item_title">
+											<h1><a href="/<%= category[0].category %>/<%= category[0]._id %>/<%= category[0].name %>"><%= category[0].name %></a></h1>
+										</div><!--news_item_title-->
+										<div class="item_meta"><%= category[0].created.toLocaleDateString() %>, by: <%= category[0].author.username %></div>
+									</div><!--item_title_date-->
+								</div><!--item_wrapper-->
+							    <div class="item_content"><%- category[0].description.slice(0,300) %>
+							    </div><!--item_content-->
+
+							</div><!--item-->               			 
+            			</div><!--feature_news_item-->
+					</div><!--col-md-6-->
+				</div>		
+				<div class="row">
+					<% for(var i = 1; i < category.length; i++) { %>								 
+						<div class="col-md-6">
+							<div class="feature_news_item">
+								<div class="item">
+									<div class="item_wrapper">
+										<div class="item_img">
+											<img class="img-responsive" src="<%= category[i].image %>" alt="Chania">
+										</div> <!--item_img-->
+										<div class="item_title_date">
+											<div class="news_item_title">
+												<h2><a href="/<%= category[i].category %>/<%= category[i]._id %>/<%= category[i].name %>"><%= category[i].name.slice(0,70) %></a></h2>
+											</div>
+											<div class="item_meta"><%= category[i].created.toLocaleDateString() %>, by: <%= category[i].author.username %></div>
+										</div><!--item_title_date-->
+									</div> <!--item_wrapper-->
+									<div class="item_content"><%- category[i].description.slice(0,100) %>
+									</div>
+	
+								</div><!--item-->
+							</div><!--feature_news_item-->
+						</div><!--col-md-6-->
+					<% } %>
+					
+
+												 
+				</div><!--row-->	
+		   	</div><!--col-md-9-->
+		   	</strong>
+		   	</strong>
+		   	</strong>
+		   	</strong>
+		   	</strong>
+		   	</strong>
+		   	<% include ../partials/sidebar %>
+		</div>
+	</div>	   	
+</section><!--feature_category_section-->
+
+<% include ../partials/footer %>

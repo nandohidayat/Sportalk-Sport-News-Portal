@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 app.use(require("express-session")({
-    secret: "Laksita is the best girlfriend",
+    secret: "Change this as you want",
     resave: false,
     saveUninitialized: false
 }));
